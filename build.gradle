@@ -1,12 +1,12 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'java'
+	id "org.springframework.boot" version "2.3.2.RELEASE"
+	id "io.spring.dependency-management" version "1.0.9.RELEASE"
+	id "java"
 }
 
-group = 'guru.sfg.brewery'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+group = "guru.sfg.brewery"
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = "11"
 
 configurations {
 	compileOnly {
@@ -19,18 +19,23 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "Hoxton.SR6")
+	set("springCloudVersion", "Hoxton.SR6")
+	set("logstashLogbackEncoderVersion", "6.4")
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	implementation(
+			"org.springframework.boot:spring-boot-starter-webflux",
+			"org.springframework.cloud:spring-cloud-starter-netflix-eureka-client",
+			"org.springframework.cloud:spring-cloud-starter-zipkin",
+			"net.logstash.logback:logstash-logback-encoder:$logstashLogbackEncoderVersion"
+	)
+	compileOnly "org.projectlombok:lombok"
+	annotationProcessor "org.projectlombok:lombok"
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude group: "org.junit.vintage", module: "junit-vintage-engine"
 	}
-	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation "io.projectreactor:reactor-test"
 }
 
 dependencyManagement {
